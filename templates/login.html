@@ -1,8 +1,19 @@
-			<div class="row">
-				<div class="col-md-2 col-md-push-5">
-					<h3>Login</h3>
-					<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-					<input type="text" class="form-control" placeholder="Password" aria-describedby="basic-addon1">
-					<button type="button" class="btn btn-default">Submit</button>
-				</div>
-			</div>
+<style type="text/css">
+.form-horizontal input.ng-valid{
+background-color: peachpuff;
+}
+
+
+</style>
+<form name="loginForm" class="form-horizontal" novalidate>
+	<div class="form-group col-md-2 col-md-push-5" ng-controller="formController">
+		<h3>Login</h3>
+		<label for="username">Username</label>
+		<input type="text" name="username" class="form-control" ng-model="user.username" required>
+		<label for"password">Password</label>
+		<input type="password" name="password" class="form-control" ng-model="user.password" required>
+		
+		<button class="btn btn-success" ng-disabled="loginForm.$invalid" ng-click="loginUsername()">Submit</button>
+		<progress-bar></progress-bar>
+	</div>
+</form>

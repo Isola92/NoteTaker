@@ -3,7 +3,8 @@
 var notesDataAccess = require('../dataaccess/notes');
 
 // helper array used in Note constructor function
-var noteFields = ['id', 'userId', 'title', 'text'];
+var noteFields = ['id', 'userId', 'title', 'text', 'color'];
+//Så här borde jag slänga in en extra kod för färgkod.
 
 /**
  * constructor function of the note model
@@ -30,6 +31,9 @@ Note.prototype = Object.create({
     save: function () {
         this._sourceData.title = this.title;
         this._sourceData.text = this.text;
+        this._sourceData.color = this.color;
+        //HÄR BORDE JAG TROLIGEN SLÄNGA IN EN EXTRA RAD SÅ DET EJ GLÖMS BORT
+        //VAR KÖRS DATA-ACCESS-CREATE METODEN??
     },
 
     /**

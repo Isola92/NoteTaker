@@ -1,0 +1,43 @@
+* Directives.
+
+Jag har skapat två egna directives för den här applikationen.
+
+progressBar är ett enkelt template-directive för att smidigt kunna inkludera laddningsanimationerna på flera ställen. Mina övriga html-templates blir renare och lättare att förstå än om jag hade copy-pastat in bootstrapkoden direkt i samtliga dokument.
+
+_____________
+
+Att använda ett direktiv för att kontrollera password-matchning är någonting jag valde att göra redan innan jag egentligen förstod varför det är smidigt att använda ett direktiv. Detta var något av det första jag gjorde i våras och det tog tid att få det att fungera men lösningen är i princip framgooglad och därefter modifierad för min applikation. 
+
+Direktivet skapar en variabel (otherModelValue) som är bundet till den ng-model där själva direktivet är inlagt (password-confirm). På denna modellen ligger en $watch som hela tiden triggar en annan funktion som tar in en annan modell som parameter (i detta fallet user.password). Denna funktionen jämför i sin tur modellernas innehåll och returnerar sant/falskt beroende på om de stämmer överrens.
+
+Om det inte stämmer så blir själva modellen invalid och eftersom otherModelValue bevakas med $watch så kommer valideringen triggas varje gång någonting händer med modellen. 
+
+_____________
+
+* Services
+
+Jag har skapat två services av typen factory för att hantera kommunikation med servern. Den ena är inriktad på account-relaterade grejer och det andra fokuserar på själva note-hanteringen. Båda fungerar på nästan exakt samma sätt och jag tycker det är mycket praktiskt att ha http-requests upplagda på det här sättet. Man kan hantera/logga resultaten innan man skickar vidare dessa till controllers som i sin tur modifierar ens view.
+I nuläget gör jag inte detta men med en service kan man enkelt dela information mellan flera controllers.
+Jag tycker detta ger applikationen en tydlig struktur där varje del har sitt ansvarsområde vilket förhoppningsvis leder till enklare hantering.
+
+_____________
+
+* API-modifiering
+
+Jag la lite tid på att bekanta mig mer med node.js och när jag förstod hur man exporterar moduler så blev det väldigt enkelt att följa den röda tråden bland dina filer. Eftersom man kan passa in objekt lite hur som helst i funktioner i JS så behövde jag bara göra några få modifieringar för att servern skulle hantera det jag skickat in. 
+
+- Har uppdaterat getNotesForUser och lagt till en rad så att den inkluderar color i listan över notes som annars bara innehöll ID och Titel. Detta var nödvändigt för att listan med användarens notes automatiskt skulle visa vald färg efter getNotes-funktionen i noteController. Utan den raden blir alla notes vita vid refresh och inloggning.
+
+- I Note-modellen ändrade jag så att helper-arrayen även tar in färg. Därefter såg jag till att färgen faktiskt sparas i save-funktionen. Dessa ändringarna var de mest centrala då de bestämmer hur objektet ska skapas.
+
+
+
+_____________
+
+* Att fixa
+
+- checkAvailability är fortfarande slö vilket ställer till problem vid form-validering.
+
+- Förvirrande startvärde på color-pickern (ser ut att vara svart men den har inget värde).
+
+- Fullösning med rootScope för att hantera ng-show/hide på nav.

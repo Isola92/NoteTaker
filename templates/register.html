@@ -1,0 +1,29 @@
+<style type="text/css">
+.form-horizontal input.ng-valid{
+background-color: peachpuff;
+}
+</style>
+<form name="form" class="form-horizontal" novalidate>
+
+  <div class="form-group col-md-2 col-md-push-5" ng-controller="formController">
+   
+    <h1>New User</h1>
+
+    <label class="control-label"  for="username">Username</label>
+
+    <input type="text" name="username" class="form-control" ng-model="user.username" ng-keyup="userDontExist()"required>
+    <p ng-show="form.username.$invalid && form.username.$dirty">Username taken</p>
+
+    
+    <label class="control-label" for="password">Password</label>
+    <input type="password" name="password" class="form-control" ng-model="user.password" required>
+    
+    <label class="control-label"  for="password_confirm">Password (Confirm)</label>
+    <input type="password" name="password_confirm" class="form-control" ng-model="user.passwordConfirmation" required pw-checker="user.password">
+    <p ng-show="form.password_confirm.$error.pwChecker && form.password_confirm.$dirty">PW does not match</p>
+    
+    <button class="btn btn-success" ng-disabled="form.$invalid" ng-click="createUser()">Register</button>
+
+    <progress-bar></progress-bar>
+  </div>
+</form>

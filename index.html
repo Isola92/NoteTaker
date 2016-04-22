@@ -3,20 +3,26 @@
 	<head>
 		<title>NoteTaker</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
 		<script src="js/plugins/angular.min.js"></script>
 		<script src="js/plugins/angular-route.min.js"></script>
 		<script src="js/plugins/angular-strap.min.js"></script>
 	</head>
-	<body ng-controller='mainCtrl'>
+	<body>
+
 
 	<ng-include src="'templates/nav.html'"></ng-include>
 	
-	<div class="container">
-		<ng-view></ng-view>
-	</div>
-	{{something}}
 
+		<ng-view></ng-view>
 		<script src="js/main.js"></script>
-		<script src="js/controllers/mainController.js"></script>
+		<script src="js/directives/pwMatch.js"></script>
+		<script src="js/directives/progressBar.js"></script>
+		<script src="js/controllers/formController.js"></script>
+		<script src="js/controllers/noteController.js"></script>
+		<script src="js/services/noteHttpService.js"></script>
+		<script src="js/services/userHttpService.js"></script>
+
+
 	</body>
 </html>
